@@ -6,11 +6,15 @@ class SearchingResults extends Component {
 
     createValidFormatOfFilm = (results) => {
         const film = {
+            title: results.items[0].snippet.title,
+            description: results.items[0].snippet.description,
             thumbnail: results.items[0].snippet.thumbnails.high.url,
             id: results.items[0].id,
             views: results.items[0].statistics.viewCount,
             likes: results.items[0].statistics.likeCount,
-            dislikes: results.items[0].statistics.dislikeCount
+            dislikes: results.items[0].statistics.dislikeCount,
+            additionDate: Date.now(),
+            isFavourite: false
         }
         return film
     }
