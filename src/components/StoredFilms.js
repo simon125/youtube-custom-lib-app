@@ -97,13 +97,15 @@ class StoredFilms extends Component {
             <div className="row">
                 <MyModal handleClick={this.handleClick} visible={this.state.sortOption.modalVisibility} />
                 <StoreOptionNav handleOnTrashClick={this.handleOnTrashClick} />
+
                 {
                     films.length !== 0 ?
-                        films.map(film => {
-                            this.convertDateToDisplay(film.additionDate)
-                            return (
-                                <div key={film.id} className="col-md-4">
-                                    <div className="my-3 card">
+                        <div className="card-columns">{
+                            films.map(film => {
+                                this.convertDateToDisplay(film.additionDate)
+                                return (
+
+                                    <div key={film.id} className="my-3 card">
                                         <span className="imgWrap">
                                             <img className="card-img-top img-fluid" style={{ cursor: 'pointer' }} src={film.thumbnail} alt="Ups there is no thumbline! Sorry!" />
                                         </span>
@@ -117,12 +119,12 @@ class StoredFilms extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <a href={`https://www.youtube.com/watch?v=${film.id}`} target="_blank" style={{ backgroundColor: ' #c4302b' }} className=" text-white m-1 btn  btn-block">Open in YouTube <i className="fab fa-youtube"></i></a>
-
                                         </div>
                                     </div>
-                                </div>
-                            )
-                        }) :
+                                )
+                            })}
+                        </div>
+                        :
                         <div className="alert alert-primary my-5 mx-auto" role="alert">
                             <p className="h3 text-center my-4">You have no films in the library at the moment <i className="far fa-frown"></i></p>
                         </div>
