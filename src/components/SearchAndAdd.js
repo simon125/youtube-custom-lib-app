@@ -37,7 +37,7 @@ class SearchAndAdd extends React.Component {
 
         const id = this.validateUrl(urlOrId)
 
-        fetch(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBfJ3rGTb5Xm56_02-DSSLzYesJb5lKaoY&id=${id}&part=snippet,statistics`)
+        fetch(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBfJ3rGTb5Xm56_02-DSSLzYesJb5lKaoY&id=${id}&part=snippet,contentDetails,statistics`)
             .then(response => response.json())
             .then(results => {
                 if (results.items.length === 0) {

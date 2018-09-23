@@ -1,0 +1,23 @@
+
+.imgWrap{
+    display: inline-block;
+    transition: all 0.2s;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+img{
+    transition: all 0.2s;
+}
+.imgWrap:hover{
+    background: url('../images/quickx-video-play-icon.png') rgba(0, 0, 0, 0.9);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scale(1.02);
+}
+img:hover,
+.imgWrap:hover img {
+    opacity: 0.3;
+}

@@ -6,6 +6,7 @@ class SearchingResults extends Component {
 
     createValidFormatOfFilm = (results) => {
         const film = {
+            thumbnail: results.items[0].snippet.thumbnails.high.url,
             id: results.items[0].id,
             views: results.items[0].statistics.viewCount,
             likes: results.items[0].statistics.likeCount,
@@ -38,7 +39,7 @@ class SearchingResults extends Component {
 
         const url = results ? `https://www.youtube.com/embed/${results.items[0].id}?rel=0` : "https://www.youtube.com/embed/BMUiFMZr7vk"
 
-        if (results) console.log(results.items[0])
+        if (results) console.log(results)
 
         const views = results ? results.items[0].statistics.viewCount : "Ups I can't find it"
         const likes = results ? results.items[0].statistics.likeCount : "Ups I can't find it"
@@ -50,7 +51,7 @@ class SearchingResults extends Component {
                     <button onClick={() => this.handleOnClick(results)} className="btn btn-success btn-block my-2">Add to collection</button>
                     <div className="d-flex justify-content-between">
                         <div className=" embed-responsive embed-responsive-16by9">
-                            <iframe title="searchedFilm" className="embed-responsive-item" src={url}></iframe>
+                            <iframe scrolling="yes" title="searchedFilm" className="embed-responsive-item" src={url}></iframe>
                         </div>
                         <ul className="ml-2 list-group">
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 fas fa-eye text-success"></i>{views}</li>
