@@ -20,14 +20,38 @@ class App extends Component {
 
   }
 
+  validateUrl = (url) => {
+
+
+    const myregexp = /youtu(?:.*\/v\/|.*v\=|\.be\/)([A-Za-z0-9_\-]{11})/i
+
+
+    // const myregexp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
+    const regExp = /([A-Za-z0-9_\-]{11})/i
+    console.log(url.match(myregexp).length)
+
+    url.match(myregexp).forEach(el => console.log(el))
+
+    if (regExp.test(url)) return url
+    else if (url.match(myregexp).length === 2) {
+      console.log('wchodze')
+      return url.match(myregexp)[1]
+    }
+  }
+
+
+
   getVideoInfo(urlOrId) {
-    fetch(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBfJ3rGTb5Xm56_02-DSSLzYesJb5lKaoY&id=${urlOrId}&part=snippet,statistics`)
+
+    const id = this.validateUrl(urlOrId)
+
+    fetch(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBfJ3rGTb5Xm56_02-DSSLzYesJb5lKaoY&id=${id}&part=snippet,statistics`)
       .then(response => response.json())
       .then(results => {
         if (results.items.length === 0) {
           console.log('STH went wrong')
         } else {
-          console.log(results)
+          this.setState({ results })
         }
       })
   }
@@ -46,8 +70,6 @@ class App extends Component {
 
 
   render() {
-
-
     return (
       <div className="container">
         <AddForm
@@ -61,7 +83,7 @@ class App extends Component {
         <MyModal handleClick={this.handleClick} visible={this.state.visible} />
 
       </div>
-    );
+    )
   }
 }
 

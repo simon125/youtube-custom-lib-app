@@ -12,7 +12,7 @@ export default class SearchingResults extends Component {
         const url = results ? `https://www.youtube.com/embed/${results.items[0].id}?rel=0` : "https://www.youtube.com/embed/BMUiFMZr7vk"
         return (
             <div className="embed-responsive embed-responsive-16by9 my-4">
-                <iframe className="embed-responsive-item" src={url}></iframe>
+                <iframe title="searchedFilm" className="embed-responsive-item" src={url}></iframe>
             </div>
         )
     }

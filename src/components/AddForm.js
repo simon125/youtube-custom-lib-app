@@ -19,7 +19,6 @@ class AddForm extends Component {
                         <input type="text" placeholder="Enter url or id of film..." id="urlOrId" className="form-control" />
                     </div>
                     <div className="form-group">
-
                         <input type="submit" value="SUBMIT" className="btn btn-success btn-lg btn-block" />
                     </div>
                 </form>
