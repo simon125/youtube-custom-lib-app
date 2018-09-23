@@ -4,9 +4,33 @@ class SearchingResults extends Component {
 
 
 
+    createValidFormatOfFilm = (results) => {
+        const film = {
+            id: results.items[0].id,
+            views: results.items[0].statistics.viewCount,
+            likes: results.items[0].statistics.likeCount,
+            dislikes: results.items[0].statistics.dislikeCount
+        }
+        return film
+    }
 
-    // addToLocalStorage = { this.addToLocalStorage }
 
+    addToLocalStorage = (film) => {
+        let films
+        if (localStorage.getItem('films') === null) {
+            films = []
+        } else {
+            films = JSON.parse(localStorage.getItem('films'))
+        }
+        const newFilms = [...films, film]
+        // console.log(JSON.stringify(newFilms))
+        localStorage.setItem('films', JSON.stringify(newFilms))
+    }
+
+    handleOnClick = (results) => {
+        const film = this.createValidFormatOfFilm(results)
+        this.addToLocalStorage(film)
+    }
 
 
     render() {
@@ -24,7 +48,7 @@ class SearchingResults extends Component {
             <div className="row">
                 <div className=" mx-auto col-md-8">
                     <h3 className="text-white">Results</h3>
-                    <button onClick={null} className="btn btn-success btn-block my-2">Add to collection</button>
+                    <button onClick={() => this.handleOnClick(results)} className="btn btn-success btn-block my-2">Add to collection</button>
                     <div className="d-flex justify-content-between">
                         <div className=" embed-responsive embed-responsive-16by9">
                             <iframe title="searchedFilm" className="embed-responsive-item" src={url}></iframe>
