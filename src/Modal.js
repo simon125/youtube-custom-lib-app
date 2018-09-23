@@ -3,9 +3,6 @@ import Modal from 'react-bootstrap4-modal';
 
 class MyModal extends Component {
 
-
-
-
     render() {
 
         const { handleClick, visible } = this.props

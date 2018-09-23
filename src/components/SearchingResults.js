@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 
-export default class SearchingResults extends Component {
+class SearchingResults extends Component {
 
+
+
+
+    // addToLocalStorage = { this.addToLocalStorage }
 
 
 
@@ -10,10 +14,34 @@ export default class SearchingResults extends Component {
         const { results } = this.props
 
         const url = results ? `https://www.youtube.com/embed/${results.items[0].id}?rel=0` : "https://www.youtube.com/embed/BMUiFMZr7vk"
+
+        if (results) console.log(results.items[0])
+
+        const views = results ? results.items[0].statistics.viewCount : "Ups I can't find it"
+        const likes = results ? results.items[0].statistics.likeCount : "Ups I can't find it"
+        const disLikes = results ? results.items[0].statistics.dislikeCount : "Ups I can't find it"
         return (
-            <div className="embed-responsive embed-responsive-16by9 my-4">
-                <iframe title="searchedFilm" className="embed-responsive-item" src={url}></iframe>
+            <div className="row">
+                <div className=" mx-auto col-md-8">
+                    <h3 className="text-white">Results</h3>
+                    <button onClick={null} className="btn btn-success btn-block my-2">Add to collection</button>
+                    <div className="d-flex justify-content-between">
+                        <div className=" embed-responsive embed-responsive-16by9">
+                            <iframe title="searchedFilm" className="embed-responsive-item" src={url}></iframe>
+                        </div>
+                        <ul className="ml-2 list-group">
+                            <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 fas fa-eye text-success"></i>{views}</li>
+                            <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-up text-success"></i> {likes}</li>
+                            <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-down text-success"></i> {disLikes}</li>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
+
         )
     }
 }
+
+
+export default SearchingResults

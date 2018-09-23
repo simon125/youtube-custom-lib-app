@@ -3,8 +3,11 @@ import MyModal from './Modal'
 
 import AddForm from './components/AddForm'
 import SearchingResults from './components/SearchingResults'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import StoredFilms from './components/StoredFilms';
 
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 
 class App extends Component {
@@ -17,7 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-
+    this.getVideoInfo('BMUiFMZr7vk')
   }
 
   validateUrl = (url) => {
@@ -38,10 +41,6 @@ class App extends Component {
 
       return id
     } else return 'wkpNvvvighY'
-
-
-
-
   }
 
 
@@ -77,18 +76,27 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <AddForm
-          handleOnSubmitAddForm={this.handleOnSubmitAddForm}
-        />
-        <SearchingResults
-          results={this.state.results}
-        />
-        <button onClick={this.handleClick} className="btn btn-primary">Toggle</button>
+      <div>
 
-        <MyModal handleClick={this.handleClick} visible={this.state.visible} />
+        <Navbar />
 
+        <div className="container">
+          <AddForm
+            handleOnSubmitAddForm={this.handleOnSubmitAddForm}
+          />
+          <SearchingResults
+            results={this.state.results}
+          />
+          <StoredFilms />
+          {/* <button onClick={this.handleClick} className="btn btn-primary">Toggle</button> */}
+
+          {/* <MyModal handleClick={this.handleClick} visible={this.state.visible} /> */}
+
+        </div>
+
+        <Footer />
       </div>
+
     )
   }
 }
