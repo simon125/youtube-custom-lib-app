@@ -17,13 +17,12 @@ class SearchingResults extends Component {
 
     addToLocalStorage = (film) => {
         let films
-        if (localStorage.getItem('films') === null) {
+        if (localStorage.getItem('films') === null) {   /////////////DRY do zewnetrznego pliku
             films = []
         } else {
             films = JSON.parse(localStorage.getItem('films'))
         }
         const newFilms = [...films, film]
-        // console.log(JSON.stringify(newFilms))
         localStorage.setItem('films', JSON.stringify(newFilms))
     }
 
@@ -57,15 +56,12 @@ class SearchingResults extends Component {
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 fas fa-eye text-success"></i>{views}</li>
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-up text-success"></i> {likes}</li>
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-down text-success"></i> {disLikes}</li>
-
                         </ul>
                     </div>
                 </div>
             </div>
-
         )
     }
 }
-
 
 export default SearchingResults
