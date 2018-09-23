@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MyModal from './Modal'
 
 import Home from './components/Home'
 import About from './components/About'

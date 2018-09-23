@@ -10,18 +10,18 @@ class MyModal extends Component {
         return (
             <Modal visible={visible} onClickBackdrop={this.modalBackdropClicked}>
                 <div className="modal-header">
-                    <h5 className="modal-title">Red Alert!</h5>
+                    <h5 className="modal-title">Hey!!!</h5>
                 </div>
                 <div className="modal-body">
-                    <p>Enemy vessel approaching!</p>
+                    <p>Are you sure that you want clear your whole library?</p>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" onClick={handleClick}>
-                        Panic
-          </button>
-                    <button type="button" className="btn btn-primary" onClick={handleClick}>
-                        Fire phasers
-          </button>
+                    <button type="button" className="btn btn-success" onClick={() => handleClick(true)}>
+                        Accept
+                    </button>
+                    <button type="button" className="btn btn-danger" onClick={() => handleClick(false)}>
+                        Cancel
+                    </button>
                 </div>
             </Modal>
         )

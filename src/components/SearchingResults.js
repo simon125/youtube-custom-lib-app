@@ -51,8 +51,8 @@ class SearchingResults extends Component {
         return (
             <div className="row">
                 <div className=" mx-auto col-md-8">
-                    <h3 className="text-white">Results</h3>
-                    <button onClick={() => this.handleOnClick(results)} className="btn btn-success btn-block my-2">Add to collection</button>
+                    <h4 className="text-white">Check if this the film which you were searching for?</h4>
+                    <button onClick={() => this.handleOnClick(results)} className="btn btn-success btn-block my-2">YES! Add to collection</button>
                     <div className="d-flex justify-content-between">
                         <div className=" embed-responsive embed-responsive-16by9">
                             <iframe scrolling="yes" title="searchedFilm" className="embed-responsive-item" src={url}></iframe>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StoreOptionNav = () => {
+const StoreOptionNav = (props) => {
     return (
         <ul className="nav col-10 bg-light  mx-auto mt-4 mb-2 d-flex justify-content-between">
             <li className="nav-item">
@@ -13,7 +13,7 @@ const StoreOptionNav = () => {
                 <a className="nav-link text-white" href="#"> <i className="fas fa-star"></i> & <i className="far fa-star"></i> Every</a>
             </li>
             <li className="nav-item">
-                <a className="nav-link text-white" href="#"><i className="fas fa-trash-alt"></i> Clear All</a>
+                <a onClick={props.handleOnTrashClick} className="nav-link text-white" href="#"><i className="fas fa-trash-alt"></i> Clear All</a>
             </li>
         </ul>
     )

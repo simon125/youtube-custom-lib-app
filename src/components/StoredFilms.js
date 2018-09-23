@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 
 import StoreOptionNav from './StoreOptionNav'
-
+import MyModal from '../Modal'
 
 import './style.css'
 
 class StoredFilms extends Component {
     state = {
-        films: []
+        films: [],
+        sortOption: {
+            dateOfAddition: null,   // false - sort from old to new, true - sort from new to old
+            showOnlyFavourite: false,
+            clearAll: false,
+            modalVisibility: false
+        }
     }
     componentDidMount() {
         this.setState({ films: this.getFilmsFromLocalStorage() })
     }
-    getFilmsFromLocalStorage = () => {
+    getFilmsFromLocalStorage = () => {////// do wywyalenia
         let films
         if (localStorage.getItem('films') === null) {   /////////////DRY do zewnetrznego pliku
             films = []
@@ -21,11 +27,11 @@ class StoredFilms extends Component {
         }
         return films
     }
-    trimDescription = (description) => {
+    trimDescription = (description) => {/////// do wywalenia
         const shortDescription = description.substring(0, 100) + '...'
         return shortDescription
     }
-    convertDateToDisplay = (time) => {
+    convertDateToDisplay = (time) => {/////// do wywalenia
         const date = new Date(time)
         let month = date.getMonth() + 1,
             day = date.getDate(),
@@ -40,8 +46,7 @@ class StoredFilms extends Component {
 
         return `Addition date: ${day}.${month}.${year} ${hour}:${minute}`
     }
-    buttonValue = (isFavourite) => {
-        console.log('isFavourite: ', isFavourite)
+    buttonValue = (isFavourite) => { /////// do wywalenia
         return isFavourite ?
             (<span>Delete from favourite <i className="fas fa-star"></i></span>)
             :
@@ -59,29 +64,61 @@ class StoredFilms extends Component {
         localStorage.setItem('films', JSON.stringify(newFilms))
         this.setState({ films: newFilms })
     }
+    clearAllStoreage = () => {
+        localStorage.removeItem('films')
+        this.setState({ films: [] })
+    }
+    handleClick = (confirmation) => {
+        this.setState({
+            sortOption: {
+                ...this.state.sortOption,
+                modalVisibility: false,
+                clearAll: confirmation
+            }
+        }, () => {
+            if (this.state.sortOption.clearAll) this.clearAllStoreage()
+        })
+
+    }
+    handleOnTrashClick = () => {
+        this.setState({
+            sortOption: {
+                ...this.state.sortOption,
+                modalVisibility: true
+            }
+        })
+    }
+
     render() {
         console.log('render')
         const films = this.state.films
 
         return (
             <div className="row">
-
-                <StoreOptionNav />
+                <MyModal handleClick={this.handleClick} visible={this.state.sortOption.modalVisibility} />
+                <StoreOptionNav handleOnTrashClick={this.handleOnTrashClick} />
                 {
                     films.length !== 0 ?
                         films.map(film => {
                             this.convertDateToDisplay(film.additionDate)
                             return (
-                                <div key={film.id} className="my-3 card col-md-4">
-                                    <span className="imgWrap">
-                                        <img className="card-img-top img-fluid" style={{ cursor: 'pointer' }} src={film.thumbnail} alt="Ups there is no thumbline! Sorry!" />
-                                    </span>
-                                    <div className="card-body">
-                                        <button onClick={() => this.toggleFavouritestate(film.id)} className="btn btn-primary  btn-block m-1"> {this.buttonValue(film.isFavourite)} </button>
-                                        <a href={`https://www.youtube.com/watch?v=${film.id}`} target="_blank" className="m-1 btn btn-primary btn-block">Open in YouTube <i className="fab fa-youtube"></i></a>
-                                        <h5 className="card-title">{film.title}</h5>
-                                        <p className="card-text">{this.trimDescription(film.description)}</p>
-                                        <p className="text-muted">{this.convertDateToDisplay(film.additionDate)}</p>
+                                <div key={film.id} className="col-md-4">
+                                    <div className="my-3 card">
+                                        <span className="imgWrap">
+                                            <img className="card-img-top img-fluid" style={{ cursor: 'pointer' }} src={film.thumbnail} alt="Ups there is no thumbline! Sorry!" />
+                                        </span>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{film.title}</h5>
+                                            <p className="card-text">{this.trimDescription(film.description)}</p>
+                                            <p className="text-muted">{this.convertDateToDisplay(film.additionDate)}</p>
+
+                                            <button onClick={() => this.toggleFavouritestate(film.id)} className="btn btn-info  btn-block m-1"> {this.buttonValue(film.isFavourite)} </button>
+                                            <button className="btn btn-primary  btn-block m-1">DELETE</button>
+                                        </div>
+                                        <div className="card-footer">
+                                            <a href={`https://www.youtube.com/watch?v=${film.id}`} target="_blank" style={{ backgroundColor: ' #c4302b' }} className=" text-white m-1 btn  btn-block">Open in YouTube <i className="fab fa-youtube"></i></a>
+
+                                        </div>
                                     </div>
                                 </div>
                             )
