@@ -21,22 +21,27 @@ class App extends Component {
   }
 
   validateUrl = (url) => {
+    let start = ''
+    let id = ''
+
+    if (url.indexOf('youtube.com/watch?v=') !== -1) {
+      start = url.indexOf('?v=') + 3
+      console.log(start)
+      id = url.substring(start, start + 11)
+      console.log(id)
+
+      return id /////// zmień wynik zwracany
+    } else if (url.indexOf('youtu.be/') !== -1) {
+      start = url.indexOf('.be/') + 4
+      id = url.substring(start, start + 11)
+      console.log(id)
+
+      return id
+    } else return 'wkpNvvvighY'
 
 
-    const myregexp = /youtu(?:.*\/v\/|.*v\=|\.be\/)([A-Za-z0-9_\-]{11})/i
 
 
-    // const myregexp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
-    const regExp = /([A-Za-z0-9_\-]{11})/i
-    console.log(url.match(myregexp).length)
-
-    url.match(myregexp).forEach(el => console.log(el))
-
-    if (regExp.test(url)) return url
-    else if (url.match(myregexp).length === 2) {
-      console.log('wchodze')
-      return url.match(myregexp)[1]
-    }
   }
 
 
@@ -51,6 +56,7 @@ class App extends Component {
         if (results.items.length === 0) {
           console.log('STH went wrong')
         } else {
+          console.log('Everything is all right')
           this.setState({ results })
         }
       })
