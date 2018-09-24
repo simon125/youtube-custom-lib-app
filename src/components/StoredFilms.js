@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-
 import StoreOptionNav from './StoreOptionNav'
 import MyModal from '../Modal'
 import IframeModal from './IframeModal'
 import { Link } from 'react-router-dom'
-
 import './style.css'
-
 class StoredFilms extends Component {
     state = {
         films: [],
@@ -136,12 +133,15 @@ class StoredFilms extends Component {
             filmToOpen: id
         })
     }
+    handleOnDelete = (id) => {
+        const films = this.getFilmsFromLocalStorage()
+        const newFilms = films.filter(film => film.id !== id)
+        this.setState({ ...this.state, films: newFilms })
+        localStorage.setItem('films', JSON.stringify(newFilms))
+    }
     render() {
-        console.log('render')
 
         const films = this.filterByIsFavourite(this.state.sortOption.showOnlyFavourite, this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films))
-
-        console.log('posortowane filmy: ', films)
 
         return (
             <div className="row mx-auto">
@@ -167,9 +167,15 @@ class StoredFilms extends Component {
                                             <h5 className="card-title">{film.title}</h5>
                                             <p className="card-text">{this.trimDescription(film.description)}</p>
                                             <p className="text-muted">{this.convertDateToDisplay(film.additionDate)}</p>
-
+                                            <ul className="ml-2 list-group d-flex flex-row justify-content-around mb-2">
+                                                <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 fas fa-eye text-success"></i>{film.views}</li>
+                                                <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-up text-success"></i> {film.likes}</li>
+                                                <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-down text-success"></i> {film.dislikes}</li>
+                                            </ul>
                                             <button onClick={() => this.toggleFavouritestate(film.id)} className="btn btn-info  btn-block m-1"> {this.buttonValue(film.isFavourite)} </button>
-                                            <button className="btn btn-primary btn-block m-1">DELETE</button>
+                                            <button onClick={() => {
+                                                this.handleOnDelete(film.id)
+                                            }} className="btn btn-primary btn-block m-1">DELETE</button>
                                         </div>
                                         <div className="card-footer">
                                             <a href={`https://www.youtube.com/watch?v=${film.id}`} target="_blank" style={{ backgroundColor: ' #c4302b' }} className=" text-white m-1 btn  btn-block">Open in YouTube <i className="fab fa-youtube"></i></a>

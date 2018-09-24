@@ -6,8 +6,6 @@ class SearchingResults extends Component {
         showAlert: false
     }
 
-
-
     createValidFormatOfFilm = (results) => {
         const film = {
             title: results.items[0].snippet.title,
@@ -22,7 +20,6 @@ class SearchingResults extends Component {
         }
         return film
     }
-
 
     addToLocalStorage = (film) => {
         let films
@@ -44,13 +41,10 @@ class SearchingResults extends Component {
         setTimeout(() => this.setState({ showAlert: false }), 2000)
     }
 
-
     render() {
 
         const className = this.state.showAlert ? "alert alert-success mt-3" : "d-none"
-
         const { results } = this.props
-
         const url = results ? `https://www.youtube.com/embed/${results.items[0].id}?rel=0` : "https://www.youtube.com/embed/BMUiFMZr7vk"
         const views = results ? results.items[0].statistics.viewCount : "Ups I can't find it"
         const likes = results ? results.items[0].statistics.likeCount : "Ups I can't find it"
