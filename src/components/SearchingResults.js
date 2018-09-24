@@ -42,9 +42,6 @@ class SearchingResults extends Component {
         const { results } = this.props
 
         const url = results ? `https://www.youtube.com/embed/${results.items[0].id}?rel=0` : "https://www.youtube.com/embed/BMUiFMZr7vk"
-
-        if (results) console.log(results)
-
         const views = results ? results.items[0].statistics.viewCount : "Ups I can't find it"
         const likes = results ? results.items[0].statistics.likeCount : "Ups I can't find it"
         const disLikes = results ? results.items[0].statistics.dislikeCount : "Ups I can't find it"

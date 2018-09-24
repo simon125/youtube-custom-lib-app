@@ -7,12 +7,13 @@ import img3 from '../images/whatNext.png'
 const Home = () => {
     return (
         <div>
-            <div className="jumbotron bg-secondary text-center pb-2">
+            <div className="jumbotron bg-secondary text-center pb-2 mt-3">
                 <h1 className="display-4">Welcome in the online film library</h1>
                 <p className="lead">With this app you can easily store your favourite youtube films</p>
                 <Link to="/search" className="btn btn-info btn-lg">Let's add your first film</Link>
                 <p className="lead mt-3">or</p>
                 <p className="lead mt-2">Read a little more about this app</p>
+                <p><i class="fas fa-arrow-circle-down fa-3x mb-3"></i></p>
             </div>
 
 
@@ -21,10 +22,10 @@ const Home = () => {
             </div>
 
 
-            <div className="row">
+            <div className="row mx-0">
                 <div className="col-md-6 px-0"><img src={img1} alt="" className="img-fluid" /></div>
-                <div className="col-md-6">
-                    <p className="lead">You can easyli saerch film by link or by id</p>
+                <div className="col-md-6 mx-0">
+                    <p className="lead text-center">You can easyli saerch film by link or by id</p>
                     <div className="form-group">
                         <input type="text" readOnly value="https://www.youtube.com/watch?v=ObX3e7MfEal     or     ObX3e7MfEal" placeholder="Enter url or id of film..." id="urlOrId" className="form-control" />
                     </div>
@@ -33,9 +34,12 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="row">
+            <div className="jumbotron text-center my-3 py-4">
+                <h5>OR</h5>
+            </div>
+            <div className="row mx-0">
                 <div className="col-md-6 py-5">
-                    <p className="lead">You can also saerch film by sharing link</p>
+                    <p className="lead text-center">You can also saerch film by sharing link</p>
                     <div className="form-group">
                         <input type="text" readOnly value="https://youtu.be/abcDEFghi_K" placeholder="Enter url or id of film..." id="urlOrId" className="form-control" />
                     </div>
@@ -48,10 +52,10 @@ const Home = () => {
                 <h3>All right, what next?</h3>
             </div>
 
-            <div className="row">
+            <div className="row mx-0">
                 <div className="col-md-6"><img src={img3} alt="" className="img-fluid" /></div>
-                <div className="col-md-6">
-                    <p className="lead">Now, after searching you can easyli add searched film by clicking button "YES! Add to collection"</p>
+                <div className="col-md-6 py-5">
+                    <p className="lead mt-5 text-center">Now, after searching you can easyli add searched film by clicking "YES! Add to collection"</p>
                     <button className="btn btn-success btn-block my-2">YES! Add to collection</button>
 
                 </div>
