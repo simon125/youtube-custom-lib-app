@@ -19,20 +19,20 @@ class StoredFilms extends Component {
     componentDidMount() {
         this.setState({ films: this.getFilmsFromLocalStorage() })
     }
-    getFilmsFromLocalStorage = () => {////// do wywyalenia
+    getFilmsFromLocalStorage = () => {/////////////DRY do zewnetrznego pliku
         let films
-        if (localStorage.getItem('films') === null) {   /////////////DRY do zewnetrznego pliku
+        if (localStorage.getItem('films') === null) {
             films = []
         } else {
             films = JSON.parse(localStorage.getItem('films'))
         }
         return films
     }
-    trimDescription = (description) => {/////// do wywalenia
+    trimDescription = (description) => {/////// do pliku zew
         const shortDescription = description.substring(0, 100) + '...'
         return shortDescription
     }
-    convertDateToDisplay = (time) => {/////// do wywalenia
+    convertDateToDisplay = (time) => {/////// do do pliku zew
         const date = new Date(time)
         let month = date.getMonth() + 1,
             day = date.getDate(),
@@ -47,7 +47,7 @@ class StoredFilms extends Component {
 
         return `Addition date: ${day}.${month}.${year} ${hour}:${minute}`
     }
-    buttonValue = (isFavourite) => { /////// do wywalenia
+    buttonValue = (isFavourite) => { /////// do pliku zew
         return isFavourite ?
             (<span>Delete from favourite <i className="fas fa-star"></i></span>)
             :
@@ -144,7 +144,7 @@ class StoredFilms extends Component {
         const films = this.filterByIsFavourite(this.state.sortOption.showOnlyFavourite, this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films))
 
         return (
-            <div className="row mx-auto">
+            <div className="container">
                 <MyModal handleClick={this.handleClick} visible={this.state.sortOption.modalVisibility} />
                 <IframeModal id={this.state.filmToOpen} handleClickFilmModal={this.handleClickFilmModal} visible={this.state.sortOption.modalWatchFilm} />
 
@@ -155,7 +155,7 @@ class StoredFilms extends Component {
                     handleOnTrashClick={this.handleOnTrashClick} />
                 {
                     films.length !== 0 ?
-                        <div className="card-columns  mx-auto">{
+                        <div className="card-columns">{
                             films.map(film => {
                                 this.convertDateToDisplay(film.additionDate)
                                 return (

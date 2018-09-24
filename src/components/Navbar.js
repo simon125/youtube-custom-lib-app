@@ -17,7 +17,7 @@ class Navbar extends Component {
 
     render() {
         return (
-            <nav className="navbar  navbar-expand-md navbar-light bg-light">
+            <nav className="navbar  navbar-expand-md navbar-light bg-light w-100">
                 <div className="container">
                     {this.state.showNav ? <RWDNavigation turnOf={this.turnOf} /> : null}
                     <Link className="navbar-brand" to="/">You<span className="text-success">Tube</span>Custom<span className="text-success">Lib</span></Link>

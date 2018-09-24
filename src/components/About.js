@@ -25,13 +25,12 @@ const About = () => {
             </ul>
             <p className="lead">Lista filmów powinna: </p>
             <ul style={{ listStyle: 'none' }}>
-                <li><i className="far fa-check-circle"></i> Posiadać paginacje </li>
+                <li><i className="far fa-circle"></i> Posiadać paginacje </li>
                 <li><i className="far fa-check-circle"></i> Posiadać możliwość wyczyszczenia wszystkich filmów</li>
-                <li><i className="far fa-check-circle"></i> ? Posiadać możliwość wgrania demo filmów</li>
+                <li><i className="far fa-circle"></i> ? Posiadać możliwość wgrania demo filmów</li>
                 <li><i className="far fa-check-circle"></i> Filtr tylko ulubione</li>
                 <li><i className="far fa-check-circle"></i> Sortowanie po najstarsze/ostatnio dodane</li>
             </ul>
-
         </div>
     )
 }
