@@ -7,6 +7,8 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import StoredFilms from './components/StoredFilms'
 import { BrowserRouter, Route } from 'react-router-dom'
+
+
 class App extends Component {
 
   render() {

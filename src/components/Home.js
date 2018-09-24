@@ -8,9 +8,9 @@ const Home = () => {
     return (
         <div className="mx-auto">
             <div className="jumbotron bg-secondary text-center pb-2 mt-3  mx-auto">
-                <h1 className="display-4">Welcome in the online film library</h1>
+                <h1 className="h3">Welcome in the online film library</h1>
                 <p className="lead">With this app you can easily store your favourite youtube films</p>
-                <Link to="/search" className="btn btn-info btn-lg">Let's add your first film</Link>
+                <Link to="/search" className="btn btn-info btn">Let's add your first film</Link>
                 <p className="lead mt-3">or</p>
                 <p className="lead mt-2">Read a little more about this app</p>
                 <p><i className="fas fa-arrow-circle-down fa-3x mb-3"></i></p>

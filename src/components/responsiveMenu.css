@@ -1,0 +1,25 @@
+.responsive-menu{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.8);
+    width: 100vw;
+    height: 100vh;
+}
+.responsive-menu__list-group{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    height: 70vh;
+    width: 70vw;
+    font-size: 40px;
+    list-style: none;
+    text-align: center;
+    color: #eee;
+
+}
+.link:hover, .link:focus, .link:active{
+   transform: scale(1.1);
+}
