@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 
 class SearchingResults extends Component {
 
+    state = {
+        showAlert: false
+    }
+
 
 
     createValidFormatOfFilm = (results) => {
@@ -34,10 +38,16 @@ class SearchingResults extends Component {
     handleOnClick = (results) => {
         const film = this.createValidFormatOfFilm(results)
         this.addToLocalStorage(film)
+        this.setState({
+            showAlert: true
+        })
+        setTimeout(() => this.setState({ showAlert: false }), 2000)
     }
 
 
     render() {
+
+        const className = this.state.showAlert ? "alert alert-success mt-3" : "d-none"
 
         const { results } = this.props
 
@@ -47,7 +57,9 @@ class SearchingResults extends Component {
         const disLikes = results ? results.items[0].statistics.dislikeCount : "Ups I can't find it"
         return (
             <div className="row">
+
                 <div className=" mx-auto col-md-8">
+
                     <h4 className="text-white">Check if this the film which you were searching for?</h4>
                     <button onClick={() => this.handleOnClick(results)} className="btn btn-success btn-block my-2">YES! Add to collection</button>
                     <div className="d-flex justify-content-between">
@@ -60,6 +72,9 @@ class SearchingResults extends Component {
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-down text-success"></i> {disLikes}</li>
                         </ul>
                     </div>
+                    <div className={className} role="alert">
+                        You add succesfully film to your collection!
+                </div>
                 </div>
             </div>
         )

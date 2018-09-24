@@ -4,7 +4,6 @@ import SearchingResults from './SearchingResults'
 
 class SearchAndAdd extends React.Component {
 
-
     state = {
         visible: false,
         results: null,
@@ -56,9 +55,6 @@ class SearchAndAdd extends React.Component {
     handleClick = () => {
         this.setState({ visible: !this.state.visible })
     }
-
-
-
     render() {
         return (
             <div>

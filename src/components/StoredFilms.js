@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import StoreOptionNav from './StoreOptionNav'
 import MyModal from '../Modal'
+import IframeModal from './IframeModal'
 import { Link } from 'react-router-dom'
 
 import './style.css'
@@ -13,8 +14,10 @@ class StoredFilms extends Component {
             sortByDateOfAddition: null,   // false - sort from old to new, true - sort from new to old, null - don't sort
             showOnlyFavourite: false,
             clearAll: false,
-            modalVisibility: false
-        }
+            modalVisibility: false,
+            modalWatchFilm: false
+        },
+        filmToOpen: 'EgHJxS198fY'
     }
     componentDidMount() {
         this.setState({ films: this.getFilmsFromLocalStorage() })
@@ -89,26 +92,18 @@ class StoredFilms extends Component {
             }
         })
     }
-
     sortByDateOfAddition = (sortByDateOfAddition, films) => {
         if (sortByDateOfAddition === null) return films
         else if (sortByDateOfAddition) {
             const arrayOfTime = films.map(film => film.additionDate).sort((a, b) => a - b)
-            console.log('posortowane czasy: ', arrayOfTime)
             const sortedFilms = arrayOfTime.map(time => films.filter(film => film.additionDate.toString() === time.toString())[0])
             return sortedFilms
         } else if (!sortByDateOfAddition) {
             const arrayOfTime = films.map(film => film.additionDate).sort((a, b) => b - a)
-            console.log('posortowane czasy: ', arrayOfTime)
             const sortedFilms = arrayOfTime.map(time => films.filter(film => film.additionDate.toString() === time.toString())[0])
             return sortedFilms
         }
     }
-
-    filterByIsFavourite = (isFavourite, films) => {
-
-    }
-
     handleOnClickSortByDate = () => {
         this.setState({
             sortOption: {
@@ -117,32 +112,56 @@ class StoredFilms extends Component {
             }
         })
     }
+    filterByIsFavourite = (filterByFavourite, films) => {
+        if (filterByFavourite === true) {
+            return films.filter(film => film.isFavourite)
+        }
+        else return films
+    }
+    handelOnClickFilterByFavourite = (filterMode) => {
+        this.setState({
+            sortOption: {
+                ...this.state.sortOption,
+                showOnlyFavourite: filterMode
+            }
+        })
+    }
+    handleClickFilmModal = (openFilmModal, id) => {
+        this.setState({
+            sortOption: {
+                ...this.state.sortOption,
+                modalWatchFilm: openFilmModal
 
+            },
+            filmToOpen: id
+        })
+    }
     render() {
         console.log('render')
 
-        const films = this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films)
-        // films = filterByIsFavourite(this.state.sortOption.showOnlyFavourite, films)
+        const films = this.filterByIsFavourite(this.state.sortOption.showOnlyFavourite, this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films))
 
         console.log('posortowane filmy: ', films)
 
-
         return (
-            <div className="row">
+            <div className="row mx-auto">
                 <MyModal handleClick={this.handleClick} visible={this.state.sortOption.modalVisibility} />
+                <IframeModal id={this.state.filmToOpen} handleClickFilmModal={this.handleClickFilmModal} visible={this.state.sortOption.modalWatchFilm} />
+
                 <StoreOptionNav
                     sortByDateOfAddition={this.state.sortOption.sortByDateOfAddition}
+                    handelOnClickFilterByFavourite={this.handelOnClickFilterByFavourite}
                     handleOnClickSortByDate={this.handleOnClickSortByDate}
                     handleOnTrashClick={this.handleOnTrashClick} />
                 {
                     films.length !== 0 ?
-                        <div className="card-columns">{
+                        <div className="card-columns  mx-auto">{
                             films.map(film => {
                                 this.convertDateToDisplay(film.additionDate)
                                 return (
                                     <div key={film.id} className="my-3 card">
                                         <span className="imgWrap">
-                                            <img className="card-img-top img-fluid" style={{ cursor: 'pointer' }} src={film.thumbnail} alt="Ups there is no thumbline! Sorry!" />
+                                            <img onClick={() => this.handleClickFilmModal(true, film.id)} className="card-img-top img-fluid" style={{ cursor: 'pointer' }} src={film.thumbnail} alt="Ups there is no thumbline! Sorry!" />
                                         </span>
                                         <div className="card-body">
                                             <h5 className="card-title">{film.title}</h5>
