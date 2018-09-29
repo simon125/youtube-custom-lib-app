@@ -4,7 +4,7 @@ I invite you to see this app and use it :) It is very simple and maybe can repla
 
 ## Installation
 
-If you want work with it or check on your localhost just clone the repository and in folder with projekct in cmd
+If you want work with it or check on your localhost just clone the repository and in folder with project in cmd
 
 ```sh
 $ npm install
