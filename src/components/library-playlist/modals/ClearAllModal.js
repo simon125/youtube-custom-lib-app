@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap4-modal';
 
-class MyModal extends Component {
+class ClearAllModal extends Component {
 
     render() {
 
@@ -27,4 +27,4 @@ class MyModal extends Component {
         )
     }
 }
-export default MyModal
+export default ClearAllModal

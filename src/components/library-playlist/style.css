@@ -11,7 +11,7 @@ img{
     transition: all 0.2s;
 }
 .imgWrap:hover{
-    background: url('../images/quickx-video-play-icon.png') rgba(0, 0, 0, 0.9);
+    background: url('./images/quickx-video-play-icon.png') rgba(0, 0, 0, 0.9);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

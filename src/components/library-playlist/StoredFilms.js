@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import StoreOptionNav from './StoreOptionNav'
-import MyModal from '../Modal'
-import IframeModal from './IframeModal'
+import MyModal from './modals/ClearAllModal'
+import IframeModal from './modals/IframeModal'
 import { Link } from 'react-router-dom'
 import './style.css'
 class StoredFilms extends Component {

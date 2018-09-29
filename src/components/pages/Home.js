@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import img1 from '../images/id.png'
-import img2 from '../images/share.png'
-import img3 from '../images/whatNext.png'
+import img1 from './images/id.png'
+import img2 from './images/share.png'
+import img3 from './images/whatNext.png'
 
 const Home = () => {
     return (

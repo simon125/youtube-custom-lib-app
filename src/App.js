@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-import Home from './components/Home'
-import About from './components/About'
-import SearchAndAdd from './components/SearchAndAdd'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import StoredFilms from './components/StoredFilms'
+import Home from './components/pages/Home'
+import About from './components/pages/About'
+import SearchAndAdd from './components/addNewFIlm/SearchAndAdd'
+import Navbar from './components/navigation/Navbar'
+import Footer from './components/pages/Footer'
+import StoredFilms from './components/library-playlist/StoredFilms'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 

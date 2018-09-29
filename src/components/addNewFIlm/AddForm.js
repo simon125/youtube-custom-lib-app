@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 
 class AddForm extends Component {
 
-
-
-
-
     render() {
 
         const { handleOnSubmitAddForm } = this.props
