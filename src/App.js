@@ -5,7 +5,7 @@ import About from './components/pages/About'
 import SearchAndAdd from './components/addNewFIlm/SearchAndAdd'
 import Navbar from './components/navigation/Navbar'
 import Footer from './components/pages/Footer'
-import StoredFilms from './components/library-playlist/StoredFilms'
+import Library from './components/library-playlist/Library'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 
@@ -28,7 +28,7 @@ class App extends Component {
             />
             <Route
               path='/library'
-              component={StoredFilms} />
+              component={Library} />
             <Route
               path='/about'
               component={About} />

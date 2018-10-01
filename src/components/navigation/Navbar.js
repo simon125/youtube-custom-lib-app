@@ -21,7 +21,6 @@ class Navbar extends Component {
                 <div className="container">
                     {this.state.showNav ? <RWDNavigation turnOf={this.turnOf} /> : null}
                     <Link className="navbar-brand" to="/">You<span className="text-success">Tube</span>Custom<span className="text-success">Lib</span></Link>
-
                     <button onClick={this.toggleNav} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

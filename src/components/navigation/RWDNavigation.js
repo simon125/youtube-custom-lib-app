@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Link, NavLink } from 'react-router-dom'
-import './responsiveMenu.css'
+import './RWDNavigation.css'
 
 const RWDNavigation = (props) => {
     return (
