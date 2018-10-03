@@ -1,24 +1,47 @@
 import React from 'react'
 import AddForm from './AddForm'
 import SearchingResults from './SearchingResults'
-import { getIdFromUrl, createURL, createInit } from '../../logic'
+import { getIdFromUrl, createURL, createInit, addToLocalStorage } from '../../logic'
+
 
 class SearchAndAdd extends React.Component {
 
     state = {
         film: null,
         client_secret: '8Cep1BIJWZKIgjMcGuCpXlPU9nTwtZV8wYMYM06m4woMEgtbE7ulnbyq7FZb+tNpM2EZNQdtGnx53A7NWtw1FlDM5L/T++G63NTwcLpIsU2dZJpLYEjbBX1+KANIh9JJ',
-        client_id: '7e9e79265eb9405a9e750858d1b135a397e299bc'
+        client_id: '7e9e79265eb9405a9e750858d1b135a397e299bc',
+        arrOfURLs: ['https://www.youtube.com/watch?v=OVGbAFy36xM',
+            'https://www.youtube.com/watch?v=FhzAjZlnGjw',
+            'https://www.youtube.com/watch?v=NsB2eya4nFA',
+            'https://www.youtube.com/watch?v=cpn05QLWUnY',
+            'https://www.youtube.com/watch?v=BSG5iHK9Scw',
+            'https://vimeo.com/159597639',
+            'https://vimeo.com/211052676',
+            'https://vimeo.com/285487972',
+            'https://vimeo.com/113464050',
+            'https://vimeo.com/292251793',
+            'https://vimeo.com/40567070']
     }
     componentDidMount() {
         this.getVideoInfo('BMUiFMZr7vk')
     }
+
+
+
+    addDemoFilmsToLocalStorage() {
+
+        this.state.arrOfURLs.forEach(url => {
+            this.getVideoInfo(url)
+                .then(film => addToLocalStorage(film))
+        })
+    }
+
     getVideoInfo(urlOrId) {
         const id = getIdFromUrl(urlOrId)
         const url = createURL(urlOrId, id)
         const init = createInit(url)
 
-        fetch(url, init)
+        return fetch(url, init)
             .then(response => {
                 console.log(response)
                 return response.json()
@@ -26,7 +49,7 @@ class SearchAndAdd extends React.Component {
             .then(results => {
                 console.log(results)
                 let film = null
-                if (id.length === 9) {
+                if (id.length === 9 || id.length === 8) {
                     console.log('wchodze updatować vimea')
                     // vimeo
                     film = {
@@ -59,8 +82,9 @@ class SearchAndAdd extends React.Component {
                     }
                 }
                 this.setState({ film })
-                console.log(film)
+                return film
             })
+            .catch(err => console.log(err))
     }
 
     handleOnSubmitAddForm = e => {
@@ -70,10 +94,13 @@ class SearchAndAdd extends React.Component {
     }
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <AddForm handleOnSubmitAddForm={this.handleOnSubmitAddForm} />
+                <div className="form-group">
+                    <button onClick={() => this.addDemoFilmsToLocalStorage()} className="btn btn-success">ADD 10 FILMS TO COLLECTION DEMO</button>
+                </div>
                 <SearchingResults film={this.state.film} />
-            </div>
+            </React.Fragment>
         )
     }
 }

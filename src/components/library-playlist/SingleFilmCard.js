@@ -7,11 +7,6 @@ const SingleFilmCard = ({
     toggleFavouritestate,
     handleOnDeleteClick
 }) => {
-
-
-
-
-
     const buttonValue = film.isFavourite ?
         <span>
             Delete from favourite <i className="fas fa-star"></i>
@@ -20,6 +15,8 @@ const SingleFilmCard = ({
         <span>
             Add to favourite <i className="far fa-star"></i>
         </span>
+
+    const href = film.service ? `https://www.youtube.com/watch?v=${film.id}` : `https://vimeo.com/${film.id}`
 
     return (
 
@@ -42,7 +39,7 @@ const SingleFilmCard = ({
                 }} className="btn btn-primary btn-block m-1">DELETE</button>
             </div>
             <div className="card-footer">
-                <a href={`https://www.youtube.com/watch?v=${film.id}`} target="_blank" style={{ backgroundColor: ' #c4302b' }} className=" text-white m-1 btn  btn-block">Open in YouTube <i className="fab fa-youtube"></i></a>
+                <a href={href} target="_blank" style={{ backgroundColor: ' #c4302b' }} className=" text-white m-1 btn  btn-block">Open in YouTube <i className="fab fa-youtube"></i></a>
             </div>
         </div>
 

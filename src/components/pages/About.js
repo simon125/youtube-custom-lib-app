@@ -6,7 +6,7 @@ const About = () => {
             <p className="lead">Aplikacja - biblioteka do przechowywania np ulubionych filmików w jednym miejscu</p>
             <p className="lead"> Napisz aplikacje która będzie używać API zewnetrznych</p>
             <p><i className="far fa-check-circle"></i> Youtube API</p>
-            <p><i className="far fa-circle"></i> Vimeo API</p>
+            <p><i className="far fa-check-circle"></i> Vimeo API</p>
 
             <p className="lead"><i className="far fa-check-circle"></i> Uzytkownik może dodać film na strone poprzez input dostępny na stronie głównej</p>
             <p className="lead">Filmy powiny być wylistowane z danymi tj: </p>
@@ -27,7 +27,7 @@ const About = () => {
             <ul style={{ listStyle: 'none' }}>
                 <li><i className="far fa-circle"></i> Posiadać paginacje </li>
                 <li><i className="far fa-check-circle"></i> Posiadać możliwość wyczyszczenia wszystkich filmów</li>
-                <li><i className="far fa-circle"></i> ? Posiadać możliwość wgrania demo filmów</li>
+                <li><i className="far fa-check-circle"></i> Możliwość ustawienia 10 demonstracyjnych filmków</li>
                 <li><i className="far fa-check-circle"></i> Filtr tylko ulubione</li>
                 <li><i className="far fa-check-circle"></i> Sortowanie po najstarsze/ostatnio dodane</li>
             </ul>

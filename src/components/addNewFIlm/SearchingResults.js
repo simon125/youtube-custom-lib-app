@@ -8,7 +8,6 @@ class SearchingResults extends Component {
         whichContent: false
     }
 
-
     handleOnClick = (film) => {
         const whichContent = addToLocalStorage(film)
         this.setState({
@@ -22,26 +21,20 @@ class SearchingResults extends Component {
 
         const { film } = this.props
 
-        // const className = !this.state.showAlert ? "d-none" : !this.state.content ? "alert alert-success mt-3" : "alert alert-danger mt-3"
+        const className = !this.state.showAlert ? "d-none" : !this.state.content ? "alert alert-success mt-3" : "alert alert-danger mt-3"
 
         const url = !film ?
             "https://www.youtube.com/embed/BMUiFMZr7vk"
             : film.service
                 ?
                 `https://www.youtube.com/embed/${film.id}?rel=0` : `https://player.vimeo.com/video/${film.id}`
-        // const views = results ? results.items[0].statistics.viewCount : "Ups I can't find it"
-        // const likes = results ? results.items[0].statistics.likeCount : "Ups I can't find it"
-        // const dislikes = results ? results.items[0].statistics.dislikeCount : "Ups I can't find it"
-
-        // "https://player.vimeo.com/video/290012756"
-
-        //
-
-
-
+        const views = film ? film.views : "Ups I can't find it"
+        const likes = film ? film.likes : "Ups I can't find it"
+        const dislikes = film ? film.dislikes : "Ups I can't find it"
 
         return (
             <div className="row">
+
                 <div className=" mx-auto col-md-8">
                     <h4 className="text-white">
                         Check if this the film which you were searching for?
@@ -53,20 +46,20 @@ class SearchingResults extends Component {
                         <div className=" embed-responsive embed-responsive-16by9">
                             <iframe scrolling="yes" title="searchedFilm" className="embed-responsive-item" src={url}></iframe>
                         </div>
-                        {/* <ul className="ml-2 list-group">
+                        <ul className="ml-2 list-group">
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 fas fa-eye text-success"></i>{views}</li>
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-up text-success"></i> {likes}</li>
                             <li className="list-group-item d-flex flex-column align-items-center"><i className="mb-1 far fa-thumbs-down text-success"></i> {dislikes}</li>
-                        </ul> */}
+                        </ul>
                     </div>
-                    {/* <div className={className} role="alert">
+                    <div className={className} role="alert">
                         {
                             this.state.whichContent ?
                                 "You already have this film in your collection"
                                 :
                                 "You have succesfully added film to collection"
                         }
-                    </div> */}
+                    </div>
                 </div>
             </div>
         )

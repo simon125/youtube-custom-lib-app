@@ -14,9 +14,10 @@ export const convertDateToDisplay = (time) => {/////// do do pliku zew
     return `Addition date: ${day}.${month}.${year} ${hour}:${minute}`
 }
 
-export const trimDescription = (description) => {/////// do pliku zew
-    const shortDescription = description.substring(0, 100) + '...'
-    return shortDescription
+export const trimDescription = (description) => {
+    if (description === undefined || description === null) return "There is no desc for this film"
+    else if (description.length < 100) return description
+    else return description.substring(0, 100) + '...'
 }
 
 export const addToLocalStorage = (film) => {

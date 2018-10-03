@@ -8,7 +8,7 @@ const RWDNavigation = (props) => {
         <div className="responsive-menu">
             <ul className="list-group responsive-menu__list-group ">
                 <li className="link">
-                    <a className="text-white" onClick={props.turnOf} href="#">&times;</a>
+                    <span className="text-white" onClick={props.turnOf} href="#">&times;</span>
                 </li>
                 <li className="link">
                     <Link className="text-white" onClick={props.turnOf} to="/">Home</Link>
