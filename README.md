@@ -13,7 +13,7 @@ $ npm start
 ## Instead installation you can check app in the link below or in description at the top of repo
 
 
-See [YouTubeCustomLib](http://youtubevimeo-lib-app.surge.sh/)
+See [YouTubeCustomLib](http://youtube-and-vimeo-playlist.surge.sh/)
 
 ### Tech
 
