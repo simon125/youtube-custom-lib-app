@@ -18,7 +18,7 @@ class Library extends Component {
     state = {
         films: [],
         sortOption: {
-            sortByDateOfAddition: null,   // false - sort from old to new, true - sort from new to old, null - don't sort
+            sortByDateOfAddition: true,   // false - sort from old to new, true - sort from new to old, null - don't sort
             showOnlyFavourite: false,
             clearAll: false,
             modalVisibility: false,

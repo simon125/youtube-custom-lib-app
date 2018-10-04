@@ -17,7 +17,8 @@ const SingleFilmCard = ({
         </span>
 
     const href = film.service ? `https://www.youtube.com/watch?v=${film.id}` : `https://vimeo.com/${film.id}`
-
+    const style = film.service ? { backgroundColor: ' #c4302b' } : { backgroundColor: '#1ab7ea' }
+    const service = film.service ? "Open in Youtube" : "Open in Vimeo"
     return (
 
         <div className="my-3 card">
@@ -39,7 +40,7 @@ const SingleFilmCard = ({
                 }} className="btn btn-primary btn-block m-1">DELETE</button>
             </div>
             <div className="card-footer">
-                <a href={href} target="_blank" style={{ backgroundColor: ' #c4302b' }} className=" text-white m-1 btn  btn-block">Open in YouTube <i className="fab fa-youtube"></i></a>
+                <a href={href} target="_blank" style={style} className=" text-white m-1 btn  btn-block">{service} <i className="fab fa-youtube"></i></a>
             </div>
         </div>
 
