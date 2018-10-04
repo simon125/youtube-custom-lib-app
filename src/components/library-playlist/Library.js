@@ -24,23 +24,12 @@ class Library extends Component {
             modalVisibility: false,
             modalWatchFilm: false,
             resultsPerPage: 5,
-            numberOfPage: 1,
-            numberOfPageToRender: 3
+            currentPage: 1
         },
         filmToOpen: 'EgHJxS198fY'
     }
     componentDidMount() {
-
-
         this.setState({ films: getFilmsFromLocalStorage() })
-        const length = this.state.films.length
-        let countOfPages = Math.floor(length / this.state.sortOption.resultsPerPage)
-        this.setState({
-            sortOption: {
-                ...this.state.sortOption,
-                numberOfPageToRender: countOfPages
-            }
-        })
     }
     toggleFavouritestate = id => {
         const films = getFilmsFromLocalStorage()
@@ -81,17 +70,11 @@ class Library extends Component {
         }
         else return films
     }
-    filterByResultsPerPage = (resultsPerPage, numberOfPage, films) => {
-        const length = films.length
-        let countOfPages = Math.floor(length / resultsPerPage)
-        if (countOfPages <= 1) return films
-        else {
-            console.log('liczba stron: ', countOfPages)
-            const start = resultsPerPage * numberOfPage
-            const end = start + resultsPerPage
-            console.log(films.slice(start, end))
-            return films.slice(start, end)
-        }
+    filterByResultsPerPage = (resultsPerPage, currentPage, films) => {
+        const end = currentPage * resultsPerPage
+        const start = end - resultsPerPage
+
+        return films.slice(start, end)
     }
     handleOnClickSortByDate = () => {
         this.setState({
@@ -147,44 +130,41 @@ class Library extends Component {
         localStorage.setItem('films', JSON.stringify(newFilms))
     }
 
-    onNumOfPageClick = (numberOfPage) => {
+    onNumOfPageClick = (event) => {
         this.setState({
             sortOption: {
                 ...this.state.sortOption,
-                numberOfPage
+                currentPage: Number(event.target.id)
             }
         })
     }
     onPreviousClick = () => {
         console.log('działa klurde')
-        if (this.state.sortOption.numberOfPage > 0) {
-            this.setState({
-                sortOption: {
-                    ...this.state.sortOption,
-                    numberOfPage: this.state.sortOption.numberOfPage - 1
-                }
-            })
-        }
+        this.setState({
+            sortOption: {
+                ...this.state.sortOption,
+                currentPage: this.state.sortOption.currentPage - 1
+            }
+        })
     }
     onNextClick = () => {
         console.log('działa klurde')
-        if (this.state.sortOption.numberOfPageToRender >= this.state.sortOption.numberOfPage) {
-            this.setState({
-                sortOption: {
-                    ...this.state.sortOption,
-                    numberOfPage: this.state.sortOption.numberOfPage + 1
-                }
-            })
-        }
+        this.setState({
+            sortOption: {
+                ...this.state.sortOption,
+                currentPage: this.state.sortOption.currentPage + 1
+            }
+        })
+
     }
 
 
 
     render() {
-        let films = this.filterByIsFavourite(this.state.sortOption.showOnlyFavourite, this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films))
-        films = this.filterByResultsPerPage(this.state.sortOption.resultsPerPage, this.state.sortOption.numberOfPage, films)
+        let filtredFilms = this.filterByIsFavourite(this.state.sortOption.showOnlyFavourite, this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films))
+        // films = this.filterByResultsPerPage(this.state.sortOption.resultsPerPage, this.state.sortOption.numberOfPage, films)
         //////filterByResultPerPage(resultsPerPage, numberOfPage, films) return films
-
+        const films = this.filterByResultsPerPage(this.state.sortOption.resultsPerPage, this.state.sortOption.currentPage, filtredFilms)
         return (
             <div className="container">
                 <ClearAllModal handleConfirmationClick={this.handleConfirmationClick} visible={this.state.sortOption.modalVisibility} />
@@ -198,7 +178,8 @@ class Library extends Component {
                     onNumOfPageClick={this.onNumOfPageClick}
                     onPreviousClick={this.onPreviousClick}
                     onNextClick={this.onNextClick}
-                    numberOfPageToRender={this.state.sortOption.numberOfPageToRender}
+                    length={filtredFilms.length}
+                    filmsPerPage={this.state.sortOption.resultsPerPage}
                 />
                 {
                     films.length !== 0 ?
