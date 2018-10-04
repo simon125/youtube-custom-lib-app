@@ -2,11 +2,6 @@ import React from 'react'
 
 const AddForm = ({ handleOnSubmitAddForm }) => {
 
-
-
-
-
-
     return (
         <div className="jumbotron bg-secondary text-light py-3 mt-4">
             <form onSubmit={handleOnSubmitAddForm}>

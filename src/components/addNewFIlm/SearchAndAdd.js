@@ -25,17 +25,12 @@ class SearchAndAdd extends React.Component {
     componentDidMount() {
         this.getVideoInfo('BMUiFMZr7vk')
     }
-
-
-
     addDemoFilmsToLocalStorage() {
-
         this.state.arrOfURLs.forEach(url => {
             this.getVideoInfo(url)
                 .then(film => addToLocalStorage(film))
         })
     }
-
     getVideoInfo(urlOrId) {
         const id = getIdFromUrl(urlOrId)
         const url = createURL(urlOrId, id)
@@ -43,21 +38,18 @@ class SearchAndAdd extends React.Component {
 
         return fetch(url, init)
             .then(response => {
-                console.log(response)
                 return response.json()
             })
             .then(results => {
-                console.log(results)
                 let film = null
                 if (id.length === 9 || id.length === 8) {
-                    console.log('wchodze updatować vimea')
-                    // vimeo
+
                     film = {
                         service: false,
                         title: results.name,
                         description: results.description,
                         thumbnail: results.pictures.sizes[4].link,
-                        id: results.link.substring(18), //////JESZCZE TO
+                        id: results.link.substring(18),
                         views: '0',
                         likes: results.metadata.connections.likes.total,
                         dislikes: "0",
@@ -66,8 +58,6 @@ class SearchAndAdd extends React.Component {
                     }
                 }
                 else if (id.length === 11) {
-                    console.log('wchodze updatować jutuba')
-                    // jutub
                     film = {
                         service: true,
                         title: results.items[0].snippet.title,

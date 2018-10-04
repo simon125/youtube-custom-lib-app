@@ -12,9 +12,6 @@ import { getFilmsFromLocalStorage } from '../../logic'
 import './style.css'
 
 class Library extends Component {
-
-
-
     state = {
         films: [],
         sortOption: {
@@ -153,7 +150,6 @@ class Library extends Component {
         })
     }
     onPreviousClick = () => {
-        console.log('działa klurde')
         if (this.state.sortOption.currentPage > 1) {
             this.setState({
                 sortOption: {
