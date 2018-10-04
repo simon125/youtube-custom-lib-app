@@ -24,12 +24,19 @@ class Library extends Component {
             modalVisibility: false,
             modalWatchFilm: false,
             resultsPerPage: 5,
-            currentPage: 1
+            currentPage: 1,
+            lastPage: 2
         },
         filmToOpen: 'EgHJxS198fY'
     }
     componentDidMount() {
         this.setState({ films: getFilmsFromLocalStorage() })
+        this.setState({
+            sortOption: {
+                ...this.state.sortOption,
+                lastPage: Math.ceil(getFilmsFromLocalStorage().length / this.state.sortOption.resultsPerPage)
+            }
+        })
     }
     toggleFavouritestate = id => {
         const films = getFilmsFromLocalStorage()
@@ -126,6 +133,13 @@ class Library extends Component {
         this.setState({
             ...this.state,
             films: newFilms
+        }, () => {
+            this.setState({
+                sortOption: {
+                    ...this.state.sortOption,
+                    lastPage: Math.ceil(getFilmsFromLocalStorage().length / this.state.sortOption.resultsPerPage)
+                }
+            })
         })
         localStorage.setItem('films', JSON.stringify(newFilms))
     }
@@ -140,30 +154,47 @@ class Library extends Component {
     }
     onPreviousClick = () => {
         console.log('działa klurde')
+        if (this.state.sortOption.currentPage > 1) {
+            this.setState({
+                sortOption: {
+                    ...this.state.sortOption,
+                    currentPage: this.state.sortOption.currentPage - 1
+                }
+            })
+        }
+    }
+    onNextClick = () => {
+        if (this.state.sortOption.lastPage > this.state.sortOption.currentPage) {
+            this.setState({
+                sortOption: {
+                    ...this.state.sortOption,
+                    currentPage: this.state.sortOption.currentPage + 1
+                }
+            })
+        }
+    }
+    setLastPage = (lastPage) => {
         this.setState({
             sortOption: {
                 ...this.state.sortOption,
-                currentPage: this.state.sortOption.currentPage - 1
+                lastPage
             }
         })
     }
-    onNextClick = () => {
-        console.log('działa klurde')
+
+    onRadioChange = e => {
         this.setState({
             sortOption: {
                 ...this.state.sortOption,
-                currentPage: this.state.sortOption.currentPage + 1
+                resultsPerPage: e.target.value
             }
         })
-
     }
 
 
 
     render() {
-        let filtredFilms = this.filterByIsFavourite(this.state.sortOption.showOnlyFavourite, this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films))
-        // films = this.filterByResultsPerPage(this.state.sortOption.resultsPerPage, this.state.sortOption.numberOfPage, films)
-        //////filterByResultPerPage(resultsPerPage, numberOfPage, films) return films
+        const filtredFilms = this.filterByIsFavourite(this.state.sortOption.showOnlyFavourite, this.sortByDateOfAddition(this.state.sortOption.sortByDateOfAddition, this.state.films))
         const films = this.filterByResultsPerPage(this.state.sortOption.resultsPerPage, this.state.sortOption.currentPage, filtredFilms)
         return (
             <div className="container">
@@ -173,13 +204,15 @@ class Library extends Component {
                     sortByDateOfAddition={this.state.sortOption.sortByDateOfAddition}
                     handelOnFilterByFavouriteClick={this.handelOnFilterByFavouriteClick}
                     handleOnClickSortByDate={this.handleOnClickSortByDate}
-                    handleOnTrashClick={this.handleOnTrashClick} />
+                    handleOnTrashClick={this.handleOnTrashClick}
+                    onRadioChange={this.onRadioChange} />
                 <PaginationNav
                     onNumOfPageClick={this.onNumOfPageClick}
                     onPreviousClick={this.onPreviousClick}
                     onNextClick={this.onNextClick}
                     length={filtredFilms.length}
                     filmsPerPage={this.state.sortOption.resultsPerPage}
+                    setLastPage={this.setLastPage}
                 />
                 {
                     films.length !== 0 ?
@@ -202,7 +235,9 @@ class Library extends Component {
                     onNumOfPageClick={this.onNumOfPageClick}
                     onPreviousClick={this.onPreviousClick}
                     onNextClick={this.onNextClick}
-                    numberOfPageToRender={this.state.sortOption.numberOfPageToRender}
+                    length={filtredFilms.length}
+                    filmsPerPage={this.state.sortOption.resultsPerPage}
+                    setLastPage={this.setLastPage}
                 />
             </div>
         )

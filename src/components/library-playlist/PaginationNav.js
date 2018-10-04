@@ -2,13 +2,11 @@ import React from 'react'
 
 const PaginationNav = ({ length, filmsPerPage, onNumOfPageClick, onPreviousClick, onNextClick }) => {
 
-
-
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(length / filmsPerPage); i++) {
         pageNumbers.push(i);
-    }
 
+    }
     const renderPageNumbers = pageNumbers.map(number => {
         return (
             <li key={number} className="page-item">

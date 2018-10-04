@@ -5,7 +5,8 @@ const LibraryNav = ({
     sortByDateOfAddition,
     handelOnFilterByFavouriteClick,
     handleOnClickSortByDate,
-    handleOnTrashClick }) => {
+    handleOnTrashClick,
+    onRadioChange }) => {
 
     const arrow = (sortByDateOfAddition === null || sortByDateOfAddition === false) ?
         <i className="fas fa-sort-down"></i>
@@ -41,15 +42,15 @@ const LibraryNav = ({
             <li className="nav-item d-flex justify-content-center mx-auto">
 
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                    <input onChange={onRadioChange} className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="5" />
                     <label className="form-check-label" htmlFor="inlineRadio1">5</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                    <input onChange={onRadioChange} className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="10" />
                     <label className="form-check-label" htmlFor="inlineRadio2">10</label>
                 </div>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
+                    <input onChange={onRadioChange} className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="15" />
                     <label className="form-check-label" htmlFor="inlineRadio3">15</label>
                 </div>
             </li>
